@@ -2,7 +2,7 @@ CREATE TABLE "Company" (
 	"CompanyName"	VARCHAR(100),
 	"ServiceDetails"	TEXT,
 	"AvailablePlatforms"	VARCHAR(100),
-	"Logo"	VARCHAR(100),
+	"Logo"	BLOB,
 	"Founders"	VARCHAR(100),
 	PRIMARY KEY("CompanyName")
 );
