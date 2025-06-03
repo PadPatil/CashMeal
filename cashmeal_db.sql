@@ -1,3 +1,5 @@
+-- Creating Tables
+
 CREATE TABLE Company (
     CompanyName TEXT PRIMARY KEY,
     ServiceDetails TEXT,
@@ -74,7 +76,11 @@ CREATE TABLE MenuItem (
 
 
 
--- Adding Sample Data
+
+-- Adding Sample Data for all tables
+
+
+-- Adding Restaurant Data
 
 INSERT INTO Restaurant VALUES (10000001, 'Taco Bell', 8.50, 10, 'San Diego, CA');
 INSERT INTO Restaurant VALUES (10000002, 'Chipotle Mexican Grill', 11.00, 12, 'Denver, CO');
@@ -88,13 +94,9 @@ INSERT INTO Restaurant VALUES (10000009, 'Domino''s Pizza', 11.50, 15, 'Ann Arbo
 
 
 
+-- Adding Menu Items
+
 -- Taco Bell Menu
-INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000001, 'Crunchy Taco', 1.69, 5);
-INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000001, 'Chicken Quesadilla', 4.99, 7);
-INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000001, 'Beef Burrito', 2.49, 6);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000001, 'Nachos BellGrande', 4.89, 8);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
@@ -109,9 +111,8 @@ INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000001, 'Baja Blast (Medium)', 2.29, 1);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000001, 'Mexican Pizza', 5.49, 9);
-
-
-
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000001, 'Beef Burrito', 2.49, 6);
 -- Chipotle Menu
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000002, 'Burrito Bowl', 9.25, 10);
@@ -123,9 +124,6 @@ INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000002, 'Veggie Tacos', 8.75, 10);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000002, 'Fountain Drink', 2.25, 1);
-
-
-
 -- McDonald's Menu
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000003, 'Big Mac', 5.69, 6);
@@ -137,9 +135,23 @@ INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000003, 'Filet-O-Fish', 4.89, 5);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000003, 'McFlurry (Oreo)', 3.89, 2);
-
-
-
+-- Subway Menu
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, '6" Turkey Breast Sub', 5.29, 6);
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, '6" Veggie Delite Sub', 4.99, 5);
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, 'Footlong Italian B.M.T.', 8.99, 7);
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, 'Footlong Meatball Marinara', 8.49, 8);
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, '6" Tuna Sub', 5.79, 6);
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, 'Footlong Spicy Italian', 8.29, 7);
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, 'Chips (Lay''s Classic)', 1.49, 1);
+INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
+VALUES (10000004, 'Fountain Drink (Medium)', 2.19, 1);
 -- Chick-fil-A Menu
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000005, 'Chicken Sandwich', 4.69, 5);
@@ -151,9 +163,6 @@ INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000005, 'Chick-n-Strips (3 pc)', 4.85, 6);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000005, 'Iced Tea', 1.89, 1);
-
-
-
 -- Panda Express Menu
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000006, 'Orange Chicken Bowl', 7.50, 8);
@@ -165,9 +174,6 @@ INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000006, 'Fried Rice', 3.25, 5);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000006, 'Veggie Spring Rolls (2 pc)', 2.99, 4);
-
-
-
 -- Wendy's Menu
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000007, 'Dave''s Single', 5.19, 6);
@@ -179,9 +185,6 @@ INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000007, 'Small Fries', 2.19, 3);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000007, 'Frosty (Chocolate)', 1.79, 2);
-
-
-
 -- Burger King Menu
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000008, 'Whopper', 5.49, 6);
@@ -193,17 +196,87 @@ INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000008, 'Mozzarella Sticks (4 pc)', 2.49, 4);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 VALUES (10000008, 'Soft Drink (Medium)', 1.99, 1);
-
-
-
 -- Domino's Pizza Menu
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000010, 'Medium Cheese Pizza', 7.99, 15);
+VALUES (10000009, 'Medium Cheese Pizza', 7.99, 15);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000010, 'Pepperoni Pizza', 8.99, 15);
+VALUES (10000009, 'Pepperoni Pizza', 8.99, 15);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000010, 'Stuffed Cheesy Bread', 6.49, 12);
+VALUES (10000009, 'Stuffed Cheesy Bread', 6.49, 12);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000010, 'Chicken Wings (8 pc)', 7.49, 13);
+VALUES (10000009, 'Chicken Wings (8 pc)', 7.49, 13);
 INSERT INTO MenuItem (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
-VALUES (10000010, 'Coke (20 oz)', 1.89, 1);
+VALUES (10000009, 'Coke (20 oz)', 1.89, 1);
+
+
+
+-- Filling the Company Table using Python
+/*
+import sqlite3
+
+conn = sqlite3.connect("your_database.db")  # Ensure this name matches your file
+cursor = conn.cursor()
+
+with open("logo.png", "rb") as file:
+    logo_blob = file.read()
+
+cursor.execute("""
+    INSERT INTO Company (CompanyName, ServiceDetails, Logo)
+    VALUES (?, ?, ?)
+""", ("BurgerMoney Inc", "High-value gourmet burgers", logo_blob))
+
+conn.commit()
+conn.close()
+*/
+
+
+
+-- Adding Founders
+INSERT INTO Founder (CompanyName, FounderName) VALUES ('CashMeal', 'Ishaan Shete');
+INSERT INTO Founder (CompanyName, FounderName) VALUES ('CashMeal', 'Padmanabh Patil');
+INSERT INTO Founder (CompanyName, FounderName) VALUES ('CashMeal', 'Sahil Shukla');
+INSERT INTO Founder (CompanyName, FounderName) VALUES ('CashMeal', 'Kevin Guan');
+INSERT INTO Founder (CompanyName, FounderName) VALUES ('CashMeal', 'Davin Til');
+
+
+
+-- Adding Company Platforms
+INSERT INTO CompanyPlatform (CompanyName, Platform) VALUES ('CashMeal', 'iOS');
+INSERT INTO CompanyPlatform (CompanyName, Platform) VALUES ('CashMeal', 'Android');
+INSERT INTO CompanyPlatform (CompanyName, Platform) VALUES ('CashMeal', 'Web');
+
+
+
+-- Adding Customers
+INSERT INTO Customer (AccountNumber, CustomerName, CustomerAddress) VALUES (10000001, 'Alice Johnson', '123 Main St, Springfield, IL');
+INSERT INTO Customer (AccountNumber, CustomerName, CustomerAddress) VALUES (10000002, 'Gwen Stacy', '456 Elm St, Denver, CO');
+INSERT INTO Customer (AccountNumber, CustomerName, CustomerAddress) VALUES (10000003, 'Raj Malhotra', '789 Maple Ave, Austin, TX');
+INSERT INTO Customer (AccountNumber, CustomerName, CustomerAddress) VALUES (10000004, 'Tongo Gatau', '321 Oak Rd, Seattle, WA');
+INSERT INTO Customer (AccountNumber, CustomerName, CustomerAddress) VALUES (10000005, 'Kim Curry', '654 Pine Ln, Boston, MA');
+
+
+
+-- Adding Event Planners
+INSERT INTO EventPlanner (EventPlannerName, EventAddress, EventTime) VALUES ('Jamie Events', 'Hotel Plaza, NY', '2025-06-05 10:00:00');
+INSERT INTO EventPlanner (EventPlannerName, EventAddress, EventTime) VALUES ('BrightOccasions', 'Lakeside Hall, MI', '2025-06-09 11:00:00');
+INSERT INTO EventPlanner (EventPlannerName, EventAddress, EventTime) VALUES ('FestiveCo', 'Sunset Arena, FL', '2025-06-16 12:00:00');
+INSERT INTO EventPlanner (EventPlannerName, EventAddress, EventTime) VALUES ('MerryMakers', 'Beachfront Club, CA', '2025-06-12 18:00:00');
+INSERT INTO EventPlanner (EventPlannerName, EventAddress, EventTime) VALUES ('GalaPro', 'City Convention Center, TX', '2025-06-07 14:00:00');
+
+
+
+-- Adding Reviewers
+INSERT INTO Reviewer (Name) VALUES ('Tina Taste');
+INSERT INTO Reviewer (Name) VALUES ('Your Food Lab');
+INSERT INTO Reviewer (Name) VALUES ('Crunch Labs');
+INSERT INTO Reviewer (Name) VALUES ('Seattle Snackies');
+INSERT INTO Reviewer (Name) VALUES ('Raju''s Rasoi');
+
+
+
+-- Adding Reviews
+INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (1, 10000001, 'Great food and fast service!', 5);
+INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (2, 10000002, 'The ambiance was amazing.', 4);
+INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (3, 10000003, 'Would definitely come again.', 5);
+INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (4, 10000004, 'Tasty but slightly overpriced.', 3);
+INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (5, 10000005, 'Loved the staff and the menu variety.', 4);
