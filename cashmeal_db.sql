@@ -74,6 +74,30 @@ CREATE TABLE MenuItem (
     UNIQUE (RestaurantID, ItemName, ItemPrice, EstimatePrepTime)
 );
 
+CREATE TABLE "Order" (
+    OrderNumber INTEGER PRIMARY KEY,
+    CustomerName TEXT,
+    AccountNumber INTEGER,
+    CustomerAddress TEXT,
+    RestaurantID INTEGER,
+    RestaurantName TEXT,
+    RestaurantAddress TEXT,
+    MenuItems TEXT, -- comma-separated list of menu item names
+    TotalPrepTime INTEGER,
+    TotalCost REAL CHECK(
+        TotalCost >= 0 AND
+        TotalCost < 1000000 AND
+        ROUND(TotalCost, 2) = TotalCost
+    ),
+    TimeConstraint INTEGER,
+    CostConstraint REAL CHECK(
+        CostConstraint >= 0 AND
+        CostConstraint < 1000000 AND
+        ROUND(CostConstraint, 2) = CostConstraint
+    ),
+    FOREIGN KEY (AccountNumber) REFERENCES Customer(AccountNumber),
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurant(RestaurantID)
+);
 
 
 
@@ -280,3 +304,44 @@ INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (2, 100
 INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (3, 10000003, 'Would definitely come again.', 5);
 INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (4, 10000004, 'Tasty but slightly overpriced.', 3);
 INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (5, 10000005, 'Loved the staff and the menu variety.', 4);
+
+
+
+-- Set Taco Bell in Chicago (restaurant location switch)
+UPDATE Restaurant
+SET Location = 'Chicago, IL'
+WHERE RestaurantName = 'Taco Bell';
+
+
+-- Adding Sample orders
+
+-- Make an order suggestion for Gwen Stacy from available options in her state
+INSERT INTO "Order" (
+    OrderNumber, CustomerName, AccountNumber, CustomerAddress,
+    RestaurantID, RestaurantName, RestaurantAddress,
+    MenuItems, TotalPrepTime, TotalCost, TimeConstraint, CostConstraint
+) VALUES (
+    1, 'Gwen Stacy', 10000002, '456 Elm St, Denver, CO',
+    10000002, 'Chipotle Mexican Grill', 'Denver, CO',
+    'Chips & Guac, Fountain Drink', 4, 6.5, 20, 10.0
+);
+-- Make order suggestions for Alice Johnson from available options in her state
+INSERT INTO "Order" (
+    OrderNumber, CustomerName, AccountNumber, CustomerAddress,
+    RestaurantID, RestaurantName, RestaurantAddress,
+    MenuItems, TotalPrepTime, TotalCost, TimeConstraint, CostConstraint
+) VALUES (
+    2, 'Alice Johnson', 10000001, '123 Main St, Springfield, IL',
+    10000003, 'McDonald''s', 'Chicago, IL',
+    'Big Mac, ', 6, 5.69, 15, 7.0
+);
+INSERT INTO "Order" (
+    OrderNumber, CustomerName, AccountNumber, CustomerAddress,
+    RestaurantID, RestaurantName, RestaurantAddress,
+    MenuItems, TotalPrepTime, TotalCost, TimeConstraint, CostConstraint
+) VALUES (
+    3, 'Alice Johnson', 10000001, '123 Main St, Springfield, IL',
+    10000001, 'Taco Bell', 'Chicago, IL',
+    'Bean Burrito, Cinnamon Twists, Baja Blast (Medium)', 8, 4.78, 10, 5.00
+);
+-- No restaurant near other customers
