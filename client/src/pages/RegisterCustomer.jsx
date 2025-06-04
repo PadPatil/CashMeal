@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterCustomer() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ export default function RegisterCustomer() {
     time: ''
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,8 +25,15 @@ export default function RegisterCustomer() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/customers/register', formData);
+      const res = await axios.post('/api/customers/register', formData);
+
+      // Optional: store returned ID or token if your backend sends it
+      if (res.data?.id) {
+        localStorage.setItem('customerId', res.data.id);
+      }
+
       alert('Customer registered successfully!');
+      navigate('/dashboard/customer'); // ✅ redirect
     } catch (error) {
       console.error('❌ Registration failed:', error);
       alert('Error: ' + (error.response?.data?.error || error.message));

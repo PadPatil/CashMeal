@@ -24,8 +24,12 @@ export default function Home() {
 
       {/* Login Button */}
       <Link to="/login" className="text-sm text-gray-700 underline hover:text-gray-900">
-        Already have an account? Log in
+        Already a restaurant? Restaurant Login
       </Link>
+      <Link to="/login/customer" className="text-green-500 underline">
+        Already a customer? Customer Login
+      </Link>
+
     </div>
   );
 }

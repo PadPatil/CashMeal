@@ -62,3 +62,6 @@ CREATE TABLE IF NOT EXISTS EventPlanner (
   TimeLimit INTEGER,
   EventTime DATETIME
 );
+DELETE FROM MenuItems;
+DELETE FROM Restaurants;
+DELETE FROM Customers;

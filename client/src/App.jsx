@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import LoginCustomer from './pages/LoginCustomer';
 import RegisterEventPlanner from './pages/RegisterEventPlanner';
 import LoginEventPlanner from './pages/LoginEventPlanner';
+import DashboardCustomer from './pages/DashboardCustomer';
+
 
 
 function App() {
@@ -21,8 +23,7 @@ function App() {
 
         <Route path="/login" element={<Login />} /> 
         <Route path="/login/customer" element={<LoginCustomer />} />
-        <Route path='register/eventplanner' element={<RegisterEventPlanner />} />
-        <Route path='/login/eventplanner' element={<LoginEventPlanner />} />
+
       </Routes>
     </Router>
   );
