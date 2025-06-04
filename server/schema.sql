@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS Customer;
 
 DROP TABLE IF EXISTS Customers;
 
-CREATE TABLE Customers (
+CREATE TABLE IF NOT EXISTS Customers (
   AccountNumber INTEGER PRIMARY KEY CHECK(AccountNumber BETWEEN 10000000 AND 99999999),
   CustomerName TEXT NOT NULL,
   CustomerEmail TEXT UNIQUE NOT NULL,
@@ -51,3 +51,14 @@ CREATE TABLE Customers (
   TimeLimit INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS EventPlanner (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  EventPlannerName TEXT NOT NULL,
+  EventAdress TEXT NOT NULL,
+  EventPlannerEmail TEXT UNIQUE NOT NULL,
+  EventPlannerPassword TEXT NOT NULL,
+  DietaryRestrictions TEXT,
+  Budget INTEGER,
+  TimeLimit INTEGER,
+  EventTime DATETIME
+);
