@@ -50,7 +50,7 @@
                 }
             ?>
             <div>
-                <a href="update_customer.php?id=<?= ?>">Update Restaurant</a>
+                <a href="update_customer.php?id=<?= $restaurantId?>">Update Restaurant</a>
             </div>
             <?php
             $conn->close();

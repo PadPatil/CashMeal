@@ -33,7 +33,7 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $sql = "SELECT RestaurantID, RestaurantName, EstimateCost, EstimatePrepTime, Location FROM Restaurant"
+                $sql = "SELECT RestaurantID, RestaurantName, EstimateCost, EstimatePrepTime, Location FROM Restaurant";
                 $stmt = $conn->stmt_init();
                 if (!$stmt->prepare($sql)){
                     echo "Failed to show restaurants";
@@ -50,7 +50,7 @@
                 }
             ?>
             <div>
-                <a href="update_restaurant.php?id=<?= ?>">Update Restaurant</a>
+                <a href="update_restaurant.php?id=<?= $restaurantId?>">Update Restaurant</a>
             </div>
             <?php
             $conn->close();
