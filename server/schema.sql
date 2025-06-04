@@ -83,6 +83,21 @@ CREATE TABLE CateringOrder (
     FOREIGN KEY (CateringMenuID) REFERENCES CateringMenu(CateringMenuID)
 );
 
+CREATE TABLE Reviewer (
+    ReviewerID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT
+);
+
+CREATE TABLE Review (
+    ReviewID INTEGER PRIMARY KEY AUTOINCREMENT,
+    ReviewerID INTEGER,
+    RestaurantID INTEGER,
+    ReviewText TEXT,
+    Rating INTEGER CHECK(Rating BETWEEN 1 AND 5),
+    FOREIGN KEY (ReviewerID) REFERENCES Reviewer(ReviewerID),
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurant(RestaurantID)
+);
+
 DELETE FROM MenuItems;
 DELETE FROM Restaurants;
 DELETE FROM Customers;
