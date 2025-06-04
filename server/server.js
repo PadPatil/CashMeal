@@ -17,6 +17,8 @@ const menuRoutes = require('./routes/menus');
 const loginRoutes = require('./routes/login');  // adjust path if needed
 const loginCustomer = require('./routes/loginCustomer');
 
+const eventPlannerRoutes = require('./routes/eventPlanner');
+
 
 app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/customers', customerRoutes);
@@ -25,6 +27,7 @@ app.use('/api/menus', menuRoutes);
 
 app.use('/api/login', loginRoutes);
 app.use('/api/customers', loginCustomer);
+app.use('/api/eventplanner', eventPlannerRoutes);
 
 
 app.get('/ping', (req, res) => {
