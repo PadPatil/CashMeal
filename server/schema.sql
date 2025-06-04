@@ -62,6 +62,27 @@ CREATE TABLE IF NOT EXISTS EventPlanner (
   TimeLimit INTEGER,
   EventTime DATETIME
 );
+
+CREATE TABLE CateringMenu (
+    CateringMenuID INTEGER PRIMARY KEY AUTOINCREMENT,
+    RestaurantID INTEGER,
+    ItemName TEXT,
+    ItemPrice REAL CHECK(ItemPrice >= 0 AND ItemPrice < 1000000 AND ROUND(ItemPrice, 2) = ItemPrice),
+    EstimatePrepTime INTEGER,
+    DefaultQuantity INTEGER CHECK(DefaultQuantity > 0),
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurant(RestaurantID),
+    UNIQUE (RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity)
+);
+
+CREATE TABLE CateringOrder (
+    CateringOrderID INTEGER PRIMARY KEY AUTOINCREMENT,
+    EventPlannerID INTEGER,
+    CateringMenuID INTEGER,
+    Quantity INTEGER CHECK(Quantity > 0),
+    FOREIGN KEY (EventPlannerID) REFERENCES EventPlanner(ID),
+    FOREIGN KEY (CateringMenuID) REFERENCES CateringMenu(CateringMenuID)
+);
+
 DELETE FROM MenuItems;
 DELETE FROM Restaurants;
 DELETE FROM Customers;
