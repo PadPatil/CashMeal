@@ -20,6 +20,9 @@ export default function Home() {
         <Link to="/register/restaurant" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
           I'm a Restaurant
         </Link>
+        <Link to="/register/eventplanner" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+          I'm an Event Planner
+        </Link>
       </div>
 
       {/* Login Button */}
@@ -28,6 +31,9 @@ export default function Home() {
       </Link>
       <Link to="/login/customer" className="text-green-500 underline">
         Already a customer? Customer Login
+      </Link>
+      <Link to="/login/eventplanner" className="text-green-500 underline">
+        Already an event planner? Event Planner Login
       </Link>
 
     </div>

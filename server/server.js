@@ -19,6 +19,8 @@ const loginCustomer = require('./routes/loginCustomer');
 const ordersRoute = require('./routes/orders');
 const searchRests = require('./routes/searchRestaurants');
 
+const eventPlannerRoutes = require('./routes/eventPlanner');
+
 
 
 app.use('/api/restaurants', restaurantRoutes);
@@ -28,6 +30,7 @@ app.use('/api/menus', menuRoutes);
 
 app.use('/api/login', loginRoutes);
 app.use('/api/customers', loginCustomer);
+app.use('/api/eventplanner', eventPlannerRoutes);
 
 app.use('/api/search-restaurants', searchRests);
 app.use('/api/orders', ordersRoute);
