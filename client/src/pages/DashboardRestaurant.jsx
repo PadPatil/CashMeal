@@ -21,7 +21,7 @@ export default function DashboardRestaurant() {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = '/login';
+    window.location.href = '/';
   };
 
   const fetchMenu = async (id) => {

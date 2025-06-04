@@ -6,6 +6,7 @@ export default function DashboardCustomer() {
   const [restaurants, setRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
+  const [quantities, setQuantities] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,15 +30,70 @@ export default function DashboardCustomer() {
   const handleRestaurantClick = async (id) => {
     try {
       const res = await axios.get(`/api/menus/${id}`);
-      setSelectedRestaurant(id);
+      setSelectedRestaurant({ id });
       setMenuItems(res.data);
     } catch (err) {
       console.error('Failed to load menu items:', err);
     }
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = '/';
+  };
+
+  const handleQuantityChange = (itemId, value) => {
+    setQuantities(prev => ({
+      ...prev,
+      [itemId]: parseInt(value) || 0
+    }));
+  };
+
+  const handleOrder = async (restaurantId, itemId) => {
+    const token = localStorage.getItem('token');
+    const accountNumber = localStorage.getItem('customerId'); // Make sure this is stored on login
+
+    if (!token || !accountNumber) {
+      alert('You must be logged in to place an order.');
+      return;
+    }
+
+    const quantity = quantities[itemId] || 1;
+    if (quantity < 1) return alert('Please enter a valid quantity.');
+
+  console.log('Sending order payload:', {
+    account_number: accountNumber,
+    restaurant_id: restaurantId,
+    items: [{ id: itemId, quantity }]
+  });
+
+    const payload = {
+      account_number: accountNumber,
+      restaurant_id: restaurantId,
+      items: [{ id: itemId, quantity }]
+    };
+    
+    try {
+      await axios.post('/api/orders', payload, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      alert('✅ Order placed successfully!');
+      setQuantities(prev => ({ ...prev, [itemId]: 0 }));
+    } catch (err) {
+      console.error('Order error:', err.response?.data || err.message);
+      alert('❌ Failed to place order.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white p-8">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-green-700">Customer Dashboard</h2>
+        <button onClick={handleLogout} className="text-sm text-red-600 underline">
+          Logout
+        </button>
+      </div>
+
       <h1 className="text-3xl font-bold mb-6 text-green-700 text-center">Search Restaurants</h1>
       <form onSubmit={handleSearch} className="max-w-3xl mx-auto bg-green-50 p-6 rounded shadow mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -96,7 +152,23 @@ export default function DashboardCustomer() {
                   <p>Price: ${item.price}</p>
                   <p>Prep Time: {item.prep_time} min</p>
                   <p>Restrictions: {item.restrictions}</p>
-                  {/* Placeholder: Add "Order" button in future */}
+
+                  <div className="mt-2 flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      placeholder="Qty"
+                      value={quantities[item.id] || ''}
+                      onChange={e => handleQuantityChange(item.id, e.target.value)}
+                      className="border px-2 py-1 w-20 rounded"
+                    />
+                    <button
+                      onClick={() => handleOrder(item.restaurant_id, item.id)}
+                      className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
+                    >
+                      Order
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

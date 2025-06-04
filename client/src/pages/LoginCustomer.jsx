@@ -7,22 +7,24 @@ export default function LoginCustomer() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('/api/customers/login-customer', { email, password });
-      const { token, id, name } = res.data;
+const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post('/api/customers/login-customer', { email, password });
+    const { token, id, name, accountNumber } = res.data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('customerId', id);
-      localStorage.setItem('customerName', name);
+    localStorage.setItem('token', token);
+    localStorage.setItem('customerId', id); // optional if not used
+    localStorage.setItem('customerName', name);
+    localStorage.setItem('accountNumber', accountNumber); // ✅ correct object and key
 
-      navigate('/dashboard/customer'); // Redirect to customer dashboard
-    } catch (err) {
-      console.error('Login failed:', err);
-      alert('Login failed. Please check your credentials.');
-    }
-  };
+    navigate('/dashboard/customer');
+  } catch (err) {
+    console.error('Login failed:', err);
+    alert('Login failed. Please check your credentials.');
+  }
+};
+
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100">

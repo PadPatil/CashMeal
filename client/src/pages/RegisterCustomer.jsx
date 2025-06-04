@@ -33,7 +33,7 @@ export default function RegisterCustomer() {
       }
 
       alert('Customer registered successfully!');
-      navigate('/dashboard/customer'); // ✅ redirect
+      navigate('/'); // ✅ redirect
     } catch (error) {
       console.error('❌ Registration failed:', error);
       alert('Error: ' + (error.response?.data?.error || error.message));

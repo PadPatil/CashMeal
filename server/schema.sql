@@ -54,3 +54,13 @@ CREATE TABLE Customers (
 DELETE FROM MenuItems;
 DELETE FROM Restaurants;
 DELETE FROM Customers;
+
+CREATE TABLE IF NOT EXISTS Orders (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  customer_id INTEGER,
+  restaurant_id INTEGER,
+  items TEXT, -- comma-separated MenuItem IDs (e.g., "1:2,3:1" → 2 of item 1, 1 of item 3)
+  total_cost REAL,
+  total_time INTEGER,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
