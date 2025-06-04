@@ -99,6 +99,25 @@ CREATE TABLE "Order" (
     FOREIGN KEY (RestaurantID) REFERENCES Restaurant(RestaurantID)
 );
 
+CREATE TABLE CateringMenu (
+    CateringMenuID INTEGER PRIMARY KEY AUTOINCREMENT,
+    RestaurantID INTEGER,
+    ItemName TEXT,
+    ItemPrice REAL CHECK(ItemPrice >= 0 AND ItemPrice < 1000000 AND ROUND(ItemPrice, 2) = ItemPrice),
+    EstimatePrepTime INTEGER,
+    DefaultQuantity INTEGER CHECK(DefaultQuantity > 0),
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurant(RestaurantID),
+    UNIQUE (RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity)
+);
+
+CREATE TABLE CateringOrder (
+    CateringOrderID INTEGER PRIMARY KEY AUTOINCREMENT,
+    EventPlannerID INTEGER,
+    CateringMenuID INTEGER,
+    Quantity INTEGER CHECK(Quantity > 0),
+    FOREIGN KEY (EventPlannerID) REFERENCES EventPlanner(ID),
+    FOREIGN KEY (CateringMenuID) REFERENCES CateringMenu(CateringMenuID)
+);
 
 
 -- Adding Sample Data for all tables
@@ -365,3 +384,88 @@ PRAGMA foreign_keys = OFF;
 DROP TABLE Restaurant;
 ALTER TABLE Restaurant_new RENAME TO Restaurant;
 PRAGMA foreign_keys = ON;
+
+
+
+
+-- Filling in the CateringMenu
+-- Taco Bell
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES
+(1, 10000001, 'Taco Party Pack (12 Tacos)', 26.99, 30, 12),
+(2, 10000001, 'Burrito Party Pack (10 Burritos)', 35.99, 35, 10),
+(3, 10000001, 'Chips & Nacho Cheese Party Size', 14.99, 15, 1),
+(4, 10000001, 'Cinnamon Delights Tray (24 pcs)', 18.50, 12, 24),
+(5, 10000001, 'Baja Blast Jug (1 Gallon)', 9.99, 5, 1);
+-- Chipotle
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES
+(6, 10000002, 'Burrito Box (10 pcs)', 89.90, 40, 10),
+(7, 10000002, 'Taco Bar for 10', 110.00, 45, 10),
+(8, 10000002, 'Chips & Guacamole Tray', 35.00, 15, 1),
+(9, 10000002, 'Brown Rice & Black Beans Tray', 29.99, 20, 1),
+(10, 10000002, 'Sofritas Tray', 40.00, 25, 1);
+-- McDonald's
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES
+(11, 10000003, 'Big Mac Platter (10 pcs)', 62.90, 30, 10),
+(12, 10000003, 'McNuggets Party Tray (40 pcs)', 42.00, 25, 40),
+(13, 10000003, 'Large Fries Tray', 21.00, 15, 5),
+(14, 10000003, 'Filet-O-Fish Platter (8 pcs)', 48.99, 28, 8),
+(15, 10000003, 'McFlurry Party Cups (10 pcs)', 35.00, 10, 10);
+-- Subway
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES
+(16, 10000004, '6 ft. Giant Sub', 99.99, 60, 1),
+(17, 10000004, 'Sub Platter (16 pcs)', 64.00, 35, 16),
+(18, 10000004, 'Cookie Platter (24 pcs)', 19.99, 15, 24),
+(19, 10000004, 'Veggie & Cheese Tray', 34.99, 20, 1),
+(20, 10000004, 'Bottled Beverages (10 Assorted)', 22.00, 5, 10);
+-- Chick-fil-A
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES
+(21, 10000005, 'Chick-n-Minis Tray (20 pcs)', 38.00, 25, 20),
+(22, 10000005, 'Chicken Sandwich Tray (10 pcs)', 56.00, 30, 10),
+(23, 10000005, 'Grilled Chicken Wraps Tray (6 halves)', 42.00, 20, 6),
+(24, 10000005, 'Fruit Tray', 29.99, 15, 1),
+(25, 10000005, 'Gallon of Lemonade', 11.50, 5, 1);
+-- Panda Express
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (26, 10000006, 'Family Meal Tray', 45.99, 30, 3);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (27, 10000006, 'Orange Chicken Party Tray', 55.49, 35, 15);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (28, 10000006, 'Chow Mein Tray', 39.99, 28, 10);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (29, 10000006, 'Fried Rice Tray', 37.89, 27, 10);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (30, 10000006, 'Spring Rolls Platter', 29.99, 25, 20);
+-- Wendy's
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (31, 10000007, 'Wendy''s Classic Burger Box', 49.99, 33, 10);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (32, 10000007, 'Spicy Chicken Sandwich Tray', 52.89, 36, 10);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (33, 10000007, 'Seasoned Fries Platter', 26.99, 25, 15);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (34, 10000007, 'Nugget Party Box', 44.50, 30, 50);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (35, 10000007, 'Garden Salad Bowl', 32.75, 20, 8);
+-- Burger King
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (36, 10000008, 'Whopper Platter', 54.99, 32, 10);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (37, 10000008, 'Chicken Fries Tray', 38.49, 28, 30);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (38, 10000008, 'BK Nuggets Box', 41.25, 30, 40);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (39, 10000008, 'Cheeseburger Pack', 47.75, 29, 12);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (40, 10000008, 'Onion Rings Tray', 25.99, 22, 15);
+-- Domino's Pizza
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (41, 10000009, 'Large Pizza Catering Pack', 62.49, 35, 4);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (42, 10000009, 'Breadsticks Bundle', 24.99, 20, 20);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (43, 10000009, 'Chicken Alfredo Pasta Tray', 55.00, 33, 8);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (44, 10000009, 'Stuffed Cheesy Bread Platter', 29.95, 25, 10);
+INSERT INTO CateringMenu (CateringMenuID, RestaurantID, ItemName, ItemPrice, EstimatePrepTime, DefaultQuantity) VALUES (45, 10000009, 'Chocolate Lava Crunch Cake Box', 34.95, 20, 10);
+
+
+
+
+-- Filling in the CateringOrder sample data
+INSERT INTO CateringOrder (CateringOrderID, EventPlannerID, CateringMenuID, Quantity) VALUES
+(1, 1, 23, 2),
+(2, 1, 25, 1),
+(3, 1, 15, 1),
+(4, 2, 10, 3),
+(5, 2, 25, 2),
+(6, 2, 18, 2),
+(7, 3, 11, 3),
+(8, 3, 7, 2),
+(9, 3, 1, 3),
+(10, 4, 20, 3),
+(11, 4, 10, 3),
+(12, 4, 23, 3),
+(13, 5, 25, 3),
+(14, 5, 5, 2),
+(15, 5, 6, 3);
