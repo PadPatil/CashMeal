@@ -7,6 +7,7 @@ import DashboardRestaurant from './pages/DashboardRestaurant';
 import Login from './pages/Login'; 
 import LoginCustomer from './pages/LoginCustomer';
 import RegisterEventPlanner from './pages/RegisterEventPlanner';
+import LoginEventPlanner from './pages/LoginEventPlanner';
 
 
 function App() {
@@ -17,10 +18,11 @@ function App() {
         <Route path="/register/restaurant" element={<RegisterRestaurant />} />
         <Route path="/register/customer" element={<RegisterCustomer />} />
         <Route path="/dashboard/restaurant" element={<DashboardRestaurant />} />
+
         <Route path="/login" element={<Login />} /> 
         <Route path="/login/customer" element={<LoginCustomer />} />
         <Route path='register/eventplanner' element={<RegisterEventPlanner />} />
-
+        <Route path='/login/eventplanner' element={<LoginEventPlanner />} />
       </Routes>
     </Router>
   );
