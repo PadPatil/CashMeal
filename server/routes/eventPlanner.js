@@ -8,8 +8,17 @@ const SECRET = 'your-super-secret-key'; // Move to env in prod
 
 // Register
 router.post('/register', async (req, res) => {
-  const { name, address, email, password, restrictions, budget, timeLimit, eventTime } = req.body;
-  const hashed = await bcrypt.hash(password, 10);
+  const {
+    EventPlannerName,
+    EventAdress,
+    EventPlannerEmail,
+    EventPlannerPassword,
+    DietaryRestrictions,
+    Budget,
+    TimeLimit,
+    EventTime
+  } = req.body;
+  const hashed = await bcrypt.hash(EventPlannerPassword, 10);
 
   db.run(`
   INSERT INTO EventPlanner (
@@ -22,7 +31,16 @@ router.post('/register', async (req, res) => {
     TimeLimit,
     EventTime
   ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-  [name, address, email, hashed, restrictions, budget, timeLimit, eventTime],
+  [
+    EventPlannerName,
+    EventAdress,
+    EventPlannerEmail,
+    hashed,
+    DietaryRestrictions || null,
+    Budget || null,
+    TimeLimit || null,
+    EventTime || null
+  ],
   function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ id: this.lastID });
