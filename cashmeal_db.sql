@@ -345,3 +345,21 @@ INSERT INTO "Order" (
     'Bean Burrito, Cinnamon Twists, Baja Blast (Medium)', 8, 4.78, 10, 5.00
 );
 -- No restaurant near other customers
+
+
+
+
+-- Realized that restaurant does not need estimate prep time or estimate cost, it varies based on customer, thus order entity
+-- creating temporary storage for the restaurant
+CREATE TABLE Restaurant_new (
+    RestaurantID INTEGER PRIMARY KEY CHECK(RestaurantID BETWEEN 10000000 AND 99999999),
+    RestaurantName TEXT,
+    Location TEXT
+);
+INSERT INTO Restaurant_new (RestaurantID, RestaurantName, Location)
+SELECT RestaurantID, RestaurantName, Location FROM Restaurant;
+-- drop old table and rename new one with old name
+PRAGMA foreign_keys = OFF;
+DROP TABLE Restaurant;
+ALTER TABLE Restaurant_new RENAME TO Restaurant;
+PRAGMA foreign_keys = ON;
