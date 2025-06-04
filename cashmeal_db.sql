@@ -299,11 +299,13 @@ INSERT INTO Reviewer (Name) VALUES ('Raju''s Rasoi');
 
 
 -- Adding Reviews
-INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (1, 10000001, 'Great food and fast service!', 5);
-INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (2, 10000002, 'The ambiance was amazing.', 4);
-INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (3, 10000003, 'Would definitely come again.', 5);
-INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (4, 10000004, 'Tasty but slightly overpriced.', 3);
-INSERT INTO Review (ReviewerID, RestaurantID, ReviewText, Rating) VALUES (5, 10000005, 'Loved the staff and the menu variety.', 4);
+INSERT INTO Review (ReviewID, ReviewerID, RestaurantID, ReviewText, Rating) VALUES
+(1, 1, 10000001, 'Delicious tacos, fast service!', 5),
+(2, 1, 10000002, 'Burrito bowl was good, guac extra.', 4),
+(3, 2, 10000003, 'Standard McD quality, fries were fresh.', 4),
+(4, 3, 10000004, 'Sub was okay, staff seemed bored.', 3),
+(5, 4, 10000002, 'Food was fresh, but staff mixed ingredients. Bad service.', 2),
+(6, 5, 10000005, 'Loved the spicy chicken sandwich!', 5);
 
 
 
