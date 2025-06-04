@@ -6,6 +6,8 @@ import RegisterCustomer from './pages/RegisterCustomer';
 import DashboardRestaurant from './pages/DashboardRestaurant';
 import Login from './pages/Login'; 
 import LoginCustomer from './pages/LoginCustomer';
+import DashboardCustomer from './pages/DashboardCustomer';
+
 
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
         <Route path="/dashboard/restaurant" element={<DashboardRestaurant />} />
         <Route path="/login" element={<Login />} /> 
         <Route path="/login/customer" element={<LoginCustomer />} />
+        <Route path="/dashboard/customer" element={<DashboardCustomer/>} />
 
       </Routes>
     </Router>

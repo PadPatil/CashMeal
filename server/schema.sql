@@ -51,3 +51,6 @@ CREATE TABLE Customers (
   TimeLimit INTEGER
 );
 
+DELETE FROM MenuItems;
+DELETE FROM Restaurants;
+DELETE FROM Customers;
