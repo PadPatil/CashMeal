@@ -5,24 +5,8 @@
  * Date: Wed, 04 Jun 2025 02:26:00 +0000
  */
 
-/* Servers configuration */
-$i = 0;
-
-/* Server: vergil.u.washington.edu [1] */
-$i++;
-$cfg['Servers'][$i]['verbose'] = '';
-$cfg['Servers'][$i]['host'] = 'vergil.u.washington.edu';
-$cfg['Servers'][$i]['port'] = 27682;
-$cfg['Servers'][$i]['socket'] = '';
-$cfg['Servers'][$i]['ssl'] = true;
-$cfg['Servers'][$i]['auth_type'] = 'config';
-$cfg['Servers'][$i]['user'] = 'root';
-$cfg['Servers'][$i]['password'] = 'CSS475CashMeal';
-
-/* End of servers configuration */
-
-$cfg['DefaultLang'] = 'en';
-$cfg['ServerDefault'] = 1;
-$cfg['UploadDir'] = '';
-$cfg['SaveDir'] = '';
-
+$servername = 'vergil.u.washington.edu'; // Your Server (if noot)
+$username = 'root';
+$password = 'CSS475CashMeal';
+$database = 'CashMeal';
+$port = 27682; // Your Port
