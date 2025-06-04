@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   const requestedRestrictions = dietary
     .split(',')
     .map(r => r.trim().toLowerCase())
-    .filter(Boolean);
+    .filter(Boolean); // remove empty strings
 
   const sql = `
     SELECT Restaurants.id AS restaurant_id, Restaurants.name AS restaurant_name,
@@ -28,6 +28,8 @@ router.get('/', (req, res) => {
       return res.status(500).json({ error: err.message });
     }
 
+    console.log('✅ Raw SQL rows:', rows.length);
+
     const restaurantMap = {};
 
     rows.forEach(row => {
@@ -35,9 +37,11 @@ router.get('/', (req, res) => {
         ? row.restrictions.toLowerCase().split(',').map(r => r.trim())
         : [];
 
-      const matchesAll = requestedRestrictions.every(r => itemRestrictions.includes(r));
+      const matchesDiet =
+        requestedRestrictions.length === 0 ||
+        requestedRestrictions.every(r => itemRestrictions.includes(r));
 
-      if (!matchesAll) return;
+      if (!matchesDiet) return;
 
       if (!restaurantMap[row.restaurant_id]) {
         restaurantMap[row.restaurant_id] = {
@@ -57,6 +61,7 @@ router.get('/', (req, res) => {
     });
 
     const results = Object.values(restaurantMap);
+    console.log('✅ Filtered restaurants:', results.length);
     res.json(results);
   });
 });

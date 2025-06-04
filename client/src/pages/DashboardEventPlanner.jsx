@@ -43,6 +43,11 @@ export default function DashboardEventPlanner() {
       alert('Search failed.');
     }
   };
+  
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = '/';
+  };
 
   const handleRestaurantClick = async (id) => {
     try {
@@ -86,6 +91,13 @@ export default function DashboardEventPlanner() {
 
   return (
     <div className="min-h-screen bg-white p-8">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-green-700">Event Planner Dashboard</h2>
+        <button onClick={handleLogout} className="text-sm text-red-600 underline">
+          Logout
+        </button>
+      </div>
+
       <h1 className="text-3xl font-bold mb-6 text-green-700 text-center">Search Restaurants</h1>
       <form onSubmit={handleSearch} className="max-w-3xl mx-auto bg-green-50 p-6 rounded shadow mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

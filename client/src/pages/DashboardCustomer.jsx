@@ -14,13 +14,18 @@ export default function DashboardCustomer() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    console.log('🔍 Search button clicked. Form data:', formData);
+
     try {
       const res = await axios.get('/api/search-restaurants', {
         params: formData
       });
+
       setRestaurants(res.data);
       setSelectedRestaurant(null);
       setMenuItems([]);
+      console.log('✅ Search response:', res.data);
+
     } catch (err) {
       console.error('Search error:', err);
       alert('Search failed.');
